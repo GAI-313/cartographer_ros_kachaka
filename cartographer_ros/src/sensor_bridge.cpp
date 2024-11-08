@@ -52,7 +52,8 @@ std::unique_ptr<carto::sensor::OdometryData> SensorBridge::ToOdometryData(
     const nav_msgs::msg::Odometry::ConstSharedPtr& msg) {
   const carto::common::Time time = FromRos(msg->header.stamp);
   const auto sensor_to_tracking = tf_bridge_.LookupToTracking(
-      time, CheckNoLeadingSlash(msg->child_frame_id));
+      //time, CheckNoLeadingSlash(msg->child_frame_id));
+      time, CheckNoLeadingSlash("base_footprint"));
   if (sensor_to_tracking == nullptr) {
     return nullptr;
   }
